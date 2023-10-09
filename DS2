@@ -1,0 +1,152 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include<stdio.h>
+#include<stdlib.h>
+int count;
+struct node {
+int data;
+struct node *next;
+struct node *prev;
+} *start = NULL;
+void insertfirstnode(int x) {
+struct node *ptr = (struct node *) malloc (sizeof (struct node));
+if(start==NULL){
+ptr->data=x;
+ptr->next=start;
+ptr->prev=NULL;
+start=ptr;
+count=count+1; }
+else{
+start->prev=ptr;
+ptr->data=x;
+ptr->next=start;
+ptr->prev=NULL;
+start=ptr;
+count=count+1;
+}}
+void insertatend(int z){
+int a,i;
+struct node *p;
+struct node *ptr = (struct node *) malloc (sizeof (struct node));
+if (start == NULL){
+count = count+1;
+start = ptr;
+start->data = z;
+start->next = NULL;
+start->prev=NULL;}
+else{
+count = count+1;
+p=start;
+while(p->next!=NULL) {
+p=p->next;}
+p->next=ptr;
+ptr->data=z;
+ptr->next=NULL;
+ptr->prev=p->next;
+}}
+void delfirstnode(){
+int a;
+struct node *p;
+if(start == NULL){
+printf("Linklist is empty");}
+else{
+if(start->next ==NULL){
+a=start->data;
+free(start);
+start=NULL;
+printf("%d is deleted item of node",a);}
+else{
+p=start->next;
+a=start->data;
+free(start);
+start=NULL;
+start=p;
+start->prev=NULL;
+printf("%d is deleted item of node",a);
+}}}
+dellastnode(){
+int a;
+struct node *p;
+struct node *q;
+if(start == NULL){
+printf("Linklist is empty");}
+else{
+if(start->next ==NULL){
+a=start->data;
+free(start);
+start=NULL;
+printf("%d is deleted item of node",a);}
+else{
+p=start;
+while(p->next->next!=NULL) {
+p=p->next;}q=p->next;
+p->next=NULL;
+a=q->data;
+q->prev=NULL;
+free(q);
+q=NULL;
+printf("%d is deleted item of node",a);
+}}}
+void traverse(){
+struct node *p;
+p=start;
+if(start==NULL)
+printf("Linklist is empty");
+else{
+printf("Linklist nodes are as follows\n");
+while (p->next!=NULL){
+printf("%d",p->data);
+printf("->");
+p=p->next;
+}
+printf("%d",p->data);
+}}
+main(){
+int n,data,a,i=1;
+printf("Select Option");
+printf("\npress 1 for Insert Node At First Position in Linklist\n");
+printf("press 2 for Insert Node At End Position in Linklist\n");
+printf("press 3 for Delete first Node Of Linklist\n");
+printf("press 4 for Delete Last Node Of Linklist\n");
+printf("press 5 Traverse The Linklist\n\n");
+while(i==1) {
+printf("\nselect option:");
+scanf("%d",&n);
+switch(n){
+case 1:
+printf("Enter value of node:");
+scanf("%d",&data);
+insertfirstnode(data);
+printf("Succesfully Inserted");
+break;
+case 2:
+printf("Enter value of node:");
+scanf("%d",&data);
+insertatend(data);
+printf("Succesfully Inserted");
+break;
+case 3:delfirstnode();
+break;
+case 4:
+dellastnode();
+break;
+case 5:
+if(count==0){
+printf("Linklist is empty");
+}
+else{
+traverse();
+}
+break;
+default:
+printf("select correct option:");
+}
+printf("\n\npress for continue 1 otherwise press 0 :");
+scanf("%d",&i);
+}}
